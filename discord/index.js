@@ -44,6 +44,27 @@ client.on('messageCreate', (msg) => {
                 console.log(errorPage)
                 msg.channel.send("Sent in request")
             })
+        } else if (msg.content.toLowerCase() == "getmenus"){
+            msg.channel.sendTyping()
+            .then(()=>{
+                functions.getAllMenus((breakfastMenu, lunchMenu, dinnerMenu)=>{
+                    console.log(breakfastMenu)
+                    msg.channel.send(breakfastMenu.getMeals())
+                    console.log(lunchMenu)
+                    msg.channel.send(lunchMenu.getMeals())
+                    console.log(dinnerMenu)
+                    msg.channel.send(dinnerMenu.getMeals())
+                })
+
+            })
+            .catch(()=>{
+
+            })
+        } else if(msg.content.toLowerCase() == "custom"){
+            functions.getStrachanLunchSpecific((result)=>{
+                console.log(result)
+                msg.channel.send(result)
+            })
         }
 
     }
